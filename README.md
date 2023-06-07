@@ -6,7 +6,7 @@ Projekts demonstrē drag and drop funkcionalitāti. Spēles mērķis ir pēc ies
 - [x] Iespēja objektu novietot brīvā vietā uz kartes
 - [x] Iespēja objektu novietot nepareizajā laukumā 
 - [x] Iespēja objektu novietot pareizajā laukumā
-- [ ] Mainīt objektu rotāciju ap z
-- [ ] Mainīt objekta platumu pa x
-- [ ] Mainīt objekta augstumu pa y
+- [x] Mainīt objektu rotāciju ap z
+- [x] Mainīt objekta platumu pa x
+- [x] Mainīt objekta augstumu pa y
 - [x] Audio efekti
