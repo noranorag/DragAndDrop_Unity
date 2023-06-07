@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class NomesanasVieta : MonoBehaviour, IDropHandler {
 	private float vietasZRot, velkObjZRot, rotacijasStarpiba;
@@ -9,7 +10,38 @@ public class NomesanasVieta : MonoBehaviour, IDropHandler {
 	private float xIzmeruStarp, yIzmeruStarp;
 	public Objekti objektuSkripts;
 
-	public void OnDrop(PointerEventData eventData)
+    void Start()
+    {
+        //izsledz visas zvaigznes sakuma
+        objektuSkripts.zvaigzne1.SetActive(false);
+        objektuSkripts.zvaigzne2.SetActive(false);
+        objektuSkripts.zvaigzne3.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (objektuSkripts.laiks <= 90)
+        {
+              objektuSkripts.zvaigzne1.SetActive(true);
+              objektuSkripts.zvaigzne2.SetActive(true);
+              objektuSkripts.zvaigzne3.SetActive(true);
+        }
+        else if (objektuSkripts.laiks > 150 && objektuSkripts.laiks <= 110)
+        {
+              objektuSkripts.zvaigzne1.SetActive(true);
+              objektuSkripts.zvaigzne2.SetActive(true);
+              objektuSkripts.zvaigzne3.SetActive(false);
+        }
+        else if (objektuSkripts.laiks > 210)
+        {
+              objektuSkripts.zvaigzne1.SetActive(true);
+              objektuSkripts.zvaigzne2.SetActive(false);
+              objektuSkripts.zvaigzne3.SetActive(false);
+        }
+
+    }
+
+    public void OnDrop(PointerEventData eventData)
 	{
 		if(eventData.pointerDrag!= null)
 		{
@@ -38,46 +70,61 @@ public class NomesanasVieta : MonoBehaviour, IDropHandler {
 					{
 						case "atkritumi":
 							objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[1]);
-						break;
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
+                        break;
 
                         case "medicina":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[2]);
-                        break;
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
+                            break;
 
                         case "buss":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[3]);
-                        break;
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
+                            break;
 
                         case "b2":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[4]);
-                        break;
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
+                            break;
 
                         case "cement":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[5]);
-                        break;
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
+                            break;
 
                         case "e46":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[6]);
-                        break;
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
+                            break;
 
                         case "e61":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[7]);
-                        break;
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
+                            break;
 
                         case "esk":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[8]);
-                        break;
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
+                            break;
+
                         case "police":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[9]);
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
                             break;
+
                         case "trak1":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[10]);
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
                             break;
+
                         case "trak5":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[11]);
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
                             break;
                         case "uguns":
                             objektuSkripts.audioAvots.PlayOneShot(objektuSkripts.skanasKoAtskanot[12]);
+                            objektuSkripts.masinasDone++; //pieskaita klat ka pabeigta velviena masina
                             break;
 
                     }
@@ -140,6 +187,18 @@ public class NomesanasVieta : MonoBehaviour, IDropHandler {
                 }
 
             }
+
 		}
-	}
+
+        if (objektuSkripts.masinasDone == 11) //salidzina pabeigtas masinas ar masinu skaitu
+        {
+     
+            if (objektuSkripts.masinasDone == 11) //sa
+                objektuSkripts.laiksOn = false; //izsledz laiku
+            objektuSkripts.beigas.SetActive(true); //parada izkartni
+
+            objektuSkripts.laikaParadisana.GetComponent<Text>().enabled = true;
+            objektuSkripts.laikaParadisana.text = objektuSkripts.laiks.ToString();
+        }
+    }
 }
